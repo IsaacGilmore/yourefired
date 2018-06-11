@@ -28,18 +28,22 @@ function death(trump, rocket) {
 }
 
 function shotdown(tweet, rocket) {
-  tweet.remove();
-  rocket.remove();
-  explosion_sound.play();
+  if (rocket.getAnimationLabel() == 'normal') {
+    tweet.remove();
+    rocket.changeAnimation('explosion');
+    explosion_sound.play();
+  }
 }
 
 function enemyKilled(rocket, enemy) {
-  rocket.remove();
-  enemy.changeAnimation('smallExplosion');
-  explosion_sound.play();
-  numberOfEmployeesKilled += 1;
-  running = false;
-  rocketMan_sound.play();
+  if (rocket.getAnimationLabel() == 'normal') {
+    rocket.remove();
+    enemy.changeAnimation('smallExplosion');
+    explosion_sound.play();
+    numberOfEmployeesKilled += 1;
+    running = false;
+    rocketMan_sound.play();
+  }
 }
 
 function createEnemy(x) {
@@ -54,9 +58,10 @@ function createEnemy(x) {
 
 function createRocket() {
   var x = random(width / 3, 2 * width / 3);
-  var y = -200;
+  var y = -600;
   var a = createSprite(x, y);
   a.addAnimation("normal", rocket_animation);
+  a.addAnimation('explosion', smallExplosion_animation);
   a.setSpeed(random(1, 3), 90);
   a.setCollider('rectangle', 0, 0, 90, 16);
   a.rotateToDirection = true;
@@ -128,6 +133,7 @@ function startScreen() {
 function gameStart() {
   numberOfEmployees = 0;
   numberOfEmployeesKilled = 0;
+  stringIndex = 0;
   running = true;
   level = 1;
   for (var i = 0; i < 20; i++) {
@@ -296,6 +302,12 @@ function draw() {
     for (var i = 0; i < enemiesGroup.length; i++) {
       var s = enemiesGroup[i];
       if (s.getAnimationLabel() == 'smallExplosion' && s.animation.getFrame() == s.animation.getLastFrame()) {
+        s.remove();
+      }
+    }
+    for (var i = 0; i < rockets.length; i++) {
+      var s = rockets[i];
+      if (s.getAnimationLabel() == 'explosion' && s.animation.getFrame() == s.animation.getLastFrame()) {
         s.remove();
       }
     }
