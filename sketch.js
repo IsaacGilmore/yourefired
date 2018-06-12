@@ -15,7 +15,7 @@ function eat(enemy, trump) {
   enemy.remove();
   eat_sound.play();
   numberOfEmployees += 1;
-  if (numberOfEmployees % 20 == 0) {
+  if (numberOfEmployees % 30 == 0) {
     level += 1;
   }
 }
@@ -163,51 +163,51 @@ function getScore() {
   var scoreStringSplit = scoreString.split("");
   imageMode(CENTER);
   if (scoreStringSplit.length == 1) {
-    image(number0, window.innerWidth / 2 - 40, 50);
+    image(number0, window.innerWidth / 2 - 40, 70);
   } else if (scoreStringSplit.length > 1) {
     stringIndex = 1;
     if (scoreStringSplit[0] == '1') {
-      image(number1, window.innerWidth / 2 - 40, 50);
+      image(number1, window.innerWidth / 2 - 40, 70);
     } else if (scoreStringSplit[0] == '2') {
-      image(number2, window.innerWidth / 2 - 40, 50);
+      image(number2, window.innerWidth / 2 - 40, 70);
     } else if (scoreStringSplit[0] == '3') {
-      image(number3, window.innerWidth / 2 - 40, 50);
+      image(number3, window.innerWidth / 2 - 40, 70);
     } else if (scoreStringSplit[0] == '4') {
-      image(number4, window.innerWidth / 2 - 40, 50);
+      image(number4, window.innerWidth / 2 - 40, 70);
     } else if (scoreStringSplit[0] == '5') {
-      image(number5, window.innerWidth / 2 - 40, 50);
+      image(number5, window.innerWidth / 2 - 40, 70);
     } else if (scoreStringSplit[0] == '6') {
-      image(number6, window.innerWidth / 2 - 40, 50);
+      image(number6, window.innerWidth / 2 - 40, 70);
     } else if (scoreStringSplit[0] == '7') {
-      image(number7, window.innerWidth / 2 - 40, 50);
+      image(number7, window.innerWidth / 2 - 40, 70);
     } else if (scoreStringSplit[0] == '8') {
-      image(number8, window.innerWidth / 2 - 40, 50);
+      image(number8, window.innerWidth / 2 - 40, 70);
     } else if (scoreStringSplit[0] == '9') {
-      image(number9, window.innerWidth / 2 - 40, 50);
+      image(number9, window.innerWidth / 2 - 40, 70);
     } else if (scoreStringSplit[0] == '0') {
-      image(number0, window.innerWidth / 2 - 40, 50);
+      image(number0, window.innerWidth / 2 - 40, 70);
     }
   }
   if (scoreStringSplit[stringIndex] == '1') {
-    image(number1, window.innerWidth / 2 + 40, 50);
+    image(number1, window.innerWidth / 2 + 40, 70);
   } else if (scoreStringSplit[stringIndex] == '2') {
-    image(number2, window.innerWidth / 2 + 40, 50);
+    image(number2, window.innerWidth / 2 + 40, 70);
   } else if (scoreStringSplit[stringIndex] == '3') {
-    image(number3, window.innerWidth / 2 + 40, 50);
+    image(number3, window.innerWidth / 2 + 40, 70);
   } else if (scoreStringSplit[stringIndex] == '4') {
-    image(number4, window.innerWidth / 2 + 40, 50);
+    image(number4, window.innerWidth / 2 + 40, 70);
   } else if (scoreStringSplit[stringIndex] == '5') {
-    image(number5, window.innerWidth / 2 + 40, 50);
+    image(number5, window.innerWidth / 2 + 40, 70);
   } else if (scoreStringSplit[stringIndex] == '6') {
-    image(number6, window.innerWidth / 2 + 40, 50);
+    image(number6, window.innerWidth / 2 + 40, 70);
   } else if (scoreStringSplit[stringIndex] == '7') {
-    image(number7, window.innerWidth / 2 + 40, 50);
+    image(number7, window.innerWidth / 2 + 40, 70);
   } else if (scoreStringSplit[stringIndex] == '8') {
-    image(number8, window.innerWidth / 2 + 40, 50);
+    image(number8, window.innerWidth / 2 + 40, 70);
   } else if (scoreStringSplit[stringIndex] == '9') {
-    image(number9, window.innerWidth / 2 + 40, 50);
+    image(number9, window.innerWidth / 2 + 40, 70);
   } else if (scoreStringSplit[stringIndex] == '0') {
-    image(number0, window.innerWidth / 2 + 40, 50);
+    image(number0, window.innerWidth / 2 + 40, 70);
   }
 }
 
@@ -220,16 +220,16 @@ function draw() {
     background(255);
     imageMode(CENTER);
     image(whitehouse_image, width / 2, 2 * height / 3);
-
-    if (frameCount % 60 / 2 == 0) {
+    if (enemiesGroup.length <= 20) {
+      createEnemy(-100);
+    }
+    if (frameCount % 60 == 0) {
       if (numberOfEmployees > 4) {
         for (var i = 0; i < level; i++) {
           createRocket(-400);
         }
       }
-      if (enemiesGroup.length <= 20) {
-        createEnemy(-100);
-      }
+
     }
 
     //==hand movement management=====
