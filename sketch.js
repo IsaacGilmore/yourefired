@@ -15,7 +15,7 @@ function eat(enemy, trump) {
   enemy.remove();
   eat_sound.play();
   numberOfEmployees += 1;
-  if (numberOfEmployees % 10 == 0) {
+  if (numberOfEmployees % 20 == 0) {
     level += 1;
   }
 }
@@ -56,9 +56,8 @@ function createEnemy(x) {
   enemiesGroup.add(a);
 }
 
-function createRocket() {
+function createRocket(y) {
   var x = random(width / 3, 2 * width / 3);
-  var y = -600;
   var a = createSprite(x, y);
   a.addAnimation("normal", rocket_animation);
   a.addAnimation('explosion', smallExplosion_animation);
@@ -139,9 +138,7 @@ function gameStart() {
   for (var i = 0; i < 20; i++) {
     createEnemy(-100);
   }
-  for (var i = 0; i < 4; i++) {
-    createRocket();
-  }
+
 }
 
 function gameOver() {
@@ -224,9 +221,11 @@ function draw() {
     imageMode(CENTER);
     image(whitehouse_image, width / 2, 2 * height / 3);
 
-    if (frameCount % 60 * 2 == 0) {
-      for (var i = 0; i < level; i++) {
-        createRocket();
+    if (frameCount % 60 / 2 == 0) {
+      if (numberOfEmployees > 4) {
+        for (var i = 0; i < level; i++) {
+          createRocket(-400);
+        }
       }
       if (enemiesGroup.length <= 20) {
         createEnemy(-100);
