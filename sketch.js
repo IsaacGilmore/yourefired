@@ -245,10 +245,14 @@ function draw() {
     image(righthand_image, handoffsetx - 150, handoffsety);
 
     //===key handling====================
-    if (keyDown(LEFT_ARROW)) {
+    if (keyDown(LEFT_ARROW) && !keyDown(DOWN_ARROW)) {
+      trump.position.x -= 8;
+    } else if (keyDown(LEFT_ARROW) && keyDown(DOWN_ARROW)) {
       trump.position.x -= 4;
     }
-    if (keyDown(RIGHT_ARROW)) {
+    if (keyDown(RIGHT_ARROW) && !keyDown(DOWN_ARROW)) {
+      trump.position.x += 8;
+    } else if (keyDown(RIGHT_ARROW) && keyDown(DOWN_ARROW)) {
       trump.position.x += 4;
     }
     if (keyDown(DOWN_ARROW)) {
