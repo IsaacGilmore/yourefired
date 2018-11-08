@@ -155,6 +155,7 @@ function gameOver() {
   if (keyWentDown('c')) {
     background(255);
     level = 0;
+    running = false; 
   }
 }
 
