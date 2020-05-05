@@ -28,7 +28,7 @@ function death(trump, rocket) {
 }
 
 function shotdown(tweet, rocket) {
-  if (rocket.getAnimationLabel() == 'normal') {
+  if (rocket.getAnimationLabel() === 'normal') {
     tweet.remove();
     rocket.changeAnimation('explosion');
     explosion_sound.play();
@@ -36,7 +36,7 @@ function shotdown(tweet, rocket) {
 }
 
 function enemyKilled(rocket, enemy) {
-  if (rocket.getAnimationLabel() == 'normal') {
+  if (rocket.getAnimationLabel() === 'normal') {
     rocket.remove();
     enemy.changeAnimation('smallExplosion');
     explosion_sound.play();
@@ -110,7 +110,7 @@ function preload() {
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  trump = createSprite(window.innerWidth / 2, window.innerHeight - 250);
+  trump = createSprite(window.innerWidth / 2, window.innerHeight - window.innerHeight/5);
   trump.addAnimation("idle", idle_animation);
   enemiesGroup = new Group();
   tweets = new Group();
@@ -138,7 +138,6 @@ function gameStart() {
   for (var i = 0; i < 20; i++) {
     createEnemy(-100);
   }
-
 }
 
 function gameOver() {
@@ -155,7 +154,7 @@ function gameOver() {
   if (keyWentDown('c')) {
     background(255);
     level = 0;
-    running = false; 
+    running = false;
   }
 }
 
@@ -242,8 +241,8 @@ function draw() {
     var handdy = targethandy - handoffsety;
     handoffsety += handdy * easing;
 
-    image(lefthand_image, handoffsetx + 150, handoffsety);
-    image(righthand_image, handoffsetx - 150, handoffsety);
+    image(lefthand_image, handoffsetx + lefthand_image.width, handoffsety, 100 - (level * 20), 100 - (level * 20));
+    image(righthand_image, handoffsetx - righthand_image.width, handoffsety, 100 - (level * 20), 100 - (level * 20));
 
     //===key handling====================
     if (keyDown(LEFT_ARROW) && !keyDown(DOWN_ARROW)) {
@@ -285,7 +284,7 @@ function draw() {
     //========trump movement restriction==
     if (trump.position.x < width / 3) trump.position.x = width / 3;
     if (trump.position.x > 2 * width / 3) trump.position.x = 2 * width / 3;
-    if (trump.position.y < window.innerHeight - 250) trump.position.y = window.innerHeight - 250;
+    if (trump.position.y < 0.6 * height) trump.position.y = 0.6 * height;
     if (trump.position.y > 4 * height / 5) trump.position.y = 4 * height / 5;
 
 
@@ -319,4 +318,8 @@ function draw() {
     drawSprites();
     getScore();
   }
+}
+
+function keyPressed() {
+  return false;
 }
