@@ -219,7 +219,7 @@ function draw() {
   } else {
     background(255);
     imageMode(CENTER);
-    image(whitehouse_image, width / 2, 2 * height / 3);
+    image(whitehouse_image, window.innerWidth / 2, 2 * window.innerHeight / 3);
     if (enemiesGroup.length <= 20) {
       createEnemy(-100);
     }
@@ -285,7 +285,7 @@ function draw() {
     if (trump.position.x < width / 3) trump.position.x = width / 3;
     if (trump.position.x > 2 * width / 3) trump.position.x = 2 * width / 3;
     if (trump.position.y < 0.6 * height) trump.position.y = 0.6 * height;
-    if (trump.position.y > 4 * height / 5) trump.position.y = 4 * height / 5;
+    if (trump.position.y > 0.8 * height) trump.position.y = 0.8 * height;
 
 
     for (var i = 0; i < enemiesGroup.length; i++) {
@@ -322,4 +322,8 @@ function draw() {
 
 function keyPressed() {
   return false;
+}
+
+function windowResized() {
+  resizeCanvas(window.innerWidth, window.innerHeight);
 }
